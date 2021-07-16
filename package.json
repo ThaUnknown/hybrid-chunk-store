@@ -29,5 +29,13 @@
   },
   "standard": {
     "ignore": "hybridchunkstore.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThaUnknown/hybrid-chunk-store.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThaUnknown/hybrid-chunk-store/issues"
+  },
+  "homepage": "https://github.com/ThaUnknown/hybrid-chunk-store#readme"
 }
