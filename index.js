@@ -9,9 +9,9 @@ const isChrome = !!window.chrome
 class HybridChunkStore {
   constructor (chunkLength, opts = {}) {
     this.chunkLength = Number(chunkLength)
+    if (!this.chunkLength) throw new Error('First argument must be a chunk length')
     this.length = opts.length
     this.opts = opts
-    if (!this.chunkLength) throw new Error('First argument must be a chunk length')
 
     this.fallbackStore = null
     this.chunkCount = null
@@ -55,7 +55,7 @@ class HybridChunkStore {
     }
   }
 
-  get (index, opts, cb = () => {}) {
+  get (index, opts, cb) {
     this.registration.then(() => {
       if (!this.chunks[index]) {
         this.fallbackStore.get(index - this.chunkCount, opts, cb)
@@ -67,7 +67,7 @@ class HybridChunkStore {
     })
   }
 
-  put (index, buf, cb = () => {}) {
+  put (index, buf, cb) {
     this.registration.then(() => {
       if (!this.chunks[index]) {
         this.fallbackStore.put(index - this.chunkCount, buf, cb)
@@ -78,11 +78,25 @@ class HybridChunkStore {
   }
 
   close (cb = () => {}) {
-    for (const store of this.stores) store.destroy(cb)
+    const promises = []
+    for (const store of this.stores) {
+      promises.push(new Promise(resolve => store.destroy(resolve)))
+    }
+    Promise.all(promises).then(values => {
+      values = values.filter(value => value)
+      cb(values.length > 1 ? values : values[0])
+    })
   }
 
   destroy (cb = () => {}) {
-    for (const store of this.stores) store.close(cb)
+    const promises = []
+    for (const store of this.stores) {
+      promises.push(new Promise(resolve => store.close(resolve)))
+    }
+    Promise.all(promises).then(values => {
+      values = values.filter(value => value)
+      cb(values.length > 1 ? values : values[0])
+    })
   }
 }
 
