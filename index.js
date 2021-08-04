@@ -29,7 +29,7 @@ class HybridChunkStore {
         this.stores.push(this.fallbackStore)
         newOpts.length = newLenght
       }
-      const store = new CacheChunkStore(new TargetStore(this.chunkLength, newOpts), { max: opts.max })
+      const store = new CacheChunkStore(new TargetStore(this.chunkLength, newOpts), { max: opts.max || 20 })
       this.stores.push(store)
       if (this.chunkCount) {
         this.chunks[this.chunkCount - 1] = store

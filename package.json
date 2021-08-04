@@ -1,6 +1,6 @@
 {
   "name": "hybrid-chunk-store",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-browser hybrid chunk store, which allows you to store as much data as possible.",
   "main": "index.js",
   "scripts": {
