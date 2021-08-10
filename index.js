@@ -77,7 +77,7 @@ class HybridChunkStore {
   close (cb = () => {}) {
     const promises = []
     for (const store of this.stores) {
-      promises.push(new Promise(resolve => store.destroy(resolve)))
+      promises.push(new Promise(resolve => store.close(resolve)))
     }
     Promise.all(promises).then(values => {
       values = values.filter(value => value)
@@ -88,7 +88,7 @@ class HybridChunkStore {
   destroy (cb = () => {}) {
     const promises = []
     for (const store of this.stores) {
-      promises.push(new Promise(resolve => store.close(resolve)))
+      promises.push(new Promise(resolve => store.destroy(resolve)))
     }
     Promise.all(promises).then(values => {
       values = values.filter(value => value)
