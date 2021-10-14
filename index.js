@@ -1,12 +1,12 @@
 /* eslint-env browser */
-const FSAccessChunkStore = require('fsa-chunk-store')
-const IDBChunkStore = require('idb-chunk-store')
-const MemoryChunkStore = require('memory-chunk-store')
-const CacheChunkStore = require('cache-chunk-store')
+import FSAccessChunkStore from 'fsa-chunk-store'
+import IDBChunkStore from 'idb-chunk-store'
+import MemoryChunkStore from 'memory-chunk-store'
+import CacheChunkStore from 'cache-chunk-store'
 
 const isChrome = !!window.chrome
 
-class HybridChunkStore {
+export default class HybridChunkStore {
   constructor (chunkLength, opts = {}) {
     this.chunkLength = Number(chunkLength)
     if (!this.chunkLength) throw new Error('First argument must be a chunk length')
@@ -20,16 +20,16 @@ class HybridChunkStore {
 
     // this is kinda stupid, first it makes the fallback store, then the main store
     // creates a store limited by targetLength, then uses memory as fallback/overflow
-    const _mapStore = (TargetStore, targetLenght) => {
+    const _mapStore = (TargetStore, targetLength) => {
       const newOpts = opts
-      if (targetLenght && targetLenght < this.length) {
-        this.chunkCount = Math.floor(targetLenght / this.chunkLength)
-        const newLenght = this.chunkCount * this.chunkLength
-        newOpts.length = this.length - newLenght
+      if (targetLength && targetLength < this.length) {
+        this.chunkCount = Math.floor(targetLength / this.chunkLength)
+        const newLength = this.chunkCount * this.chunkLength
+        newOpts.length = this.length - newLength
         // ideally this should be blob store, some1 make one pls
         this.fallbackStore = new MemoryChunkStore(this.chunkLength, newOpts)
         this.stores.push(this.fallbackStore)
-        newOpts.length = newLenght
+        newOpts.length = newLength
       }
       const store = new CacheChunkStore(new TargetStore(this.chunkLength, newOpts), { max: opts.max || 20 })
       this.stores.push(store)
@@ -96,5 +96,3 @@ class HybridChunkStore {
     })
   }
 }
-
-module.exports = HybridChunkStore
