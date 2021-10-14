@@ -4,8 +4,7 @@
   "description": "Cross-browser hybrid chunk store, which allows you to store as much data as possible.",
   "main": "index.js",
   "scripts": {
-    "test": "standard",
-    "build": "browserify --standalone HybridChunkStore . | minify --mangle=false > hybridchunkstore.min.js"
+    "test": "standard"
   },
   "keywords": [
     "abstract-chunk-store",
@@ -24,7 +23,7 @@
   },
   "dependencies": {
     "cache-chunk-store": "^3.2.2",
-    "fs-access-chunk-store": "github:ThaUnknown/fs-access-chunk-store#filesystem",
+    "fsa-chunk-store": "github:ThaUnknown/fsa-chunk-store",
     "idb-chunk-store": "^1.0.1",
     "memory-chunk-store": "^1.3.5"
   },

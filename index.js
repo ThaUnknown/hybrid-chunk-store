@@ -1,5 +1,5 @@
 /* eslint-env browser */
-const FSAccessChunkStore = require('fs-access-chunk-store')
+const FSAccessChunkStore = require('fsa-chunk-store')
 const IDBChunkStore = require('idb-chunk-store')
 const MemoryChunkStore = require('memory-chunk-store')
 const CacheChunkStore = require('cache-chunk-store')
