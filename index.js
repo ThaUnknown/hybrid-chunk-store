@@ -20,6 +20,7 @@ export default class HybridChunkStore {
 
     // this is kinda stupid, first it makes the fallback store, then the main store
     // creates a store limited by targetLength, then uses memory as fallback/overflow
+    // if targetlength is falsy then it will assume infinite storage
     const _mapStore = (TargetStore, targetLength) => {
       const newOpts = opts
       if (targetLength && targetLength < this.length) {
@@ -40,16 +41,25 @@ export default class HybridChunkStore {
         this.fallbackStore = store
       }
     }
-
     this.registration = navigator.storage.estimate().then(estimate => {
       // use less than available
       const remaining = estimate.quota - estimate.usage - Math.max(Number(opts.reserved) || 0, 16777216)
-      if ('getDirectory' in navigator.storage) {
-        // lets hope the user isn't stupid enough to specify a directory with barely any storage, forgive me tech support people
-        _mapStore(FSAccessChunkStore, !(opts.rootDir) && remaining)
+      // if user only wants to use memory, or there is no space, force memory only
+      if (opts.onlyMem === true || remaining <= 0) {
+        this.fallbackStore = new MemoryChunkStore(this.chunkLength, opts)
+        this.stores.push(this.fallbackStore)
+        this.chunkCount = 0
       } else {
+        if ('getDirectory' in navigator.storage) {
+        // lets hope the user isn't stupid enough to specify a directory with barely any storage, forgive me tech support people
+        // can't detect avaliable quota in custom folders
+          _mapStore(FSAccessChunkStore, !(opts.rootDir) && remaining)
+        } else {
         // WAH. https://i.kym-cdn.com/entries/icons/original/000/027/528/519.png
-        _mapStore(IDBChunkStore, !(isChrome && estimate.quota === 2147483648) && remaining)
+        // some OS versions and some chromium browsers report quota as 2^31 when it has more than that available
+        // this means we can't estimate how much space they have... oh well
+          _mapStore(IDBChunkStore, !(isChrome && estimate.quota === 2147483648) && remaining)
+        }
       }
     })
   }
