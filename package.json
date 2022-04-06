@@ -1,6 +1,6 @@
 {
   "name": "hybrid-chunk-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cross-browser hybrid chunk store, which allows you to store as much data as possible.",
   "main": "index.js",
   "type": "module",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "cache-chunk-store": "^3.2.2",
-    "fsa-chunk-store": "github:ThaUnknown/fsa-chunk-store",
+    "fsa-chunk-store": "^1.0.0",
     "idb-chunk-store": "^1.0.1",
     "memory-chunk-store": "^1.3.5"
   },
