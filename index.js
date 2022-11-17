@@ -3,7 +3,7 @@ import IDBChunkStore from 'idb-chunk-store'
 import MemoryChunkStore from 'memory-chunk-store'
 import CacheChunkStore from 'cache-chunk-store'
 
-const isChrome = !!(typeof window !== 'undefined' ? window : self).chrome
+const isChrome = !!((typeof globalThis !== 'undefined' && globalThis) || (typeof self !== 'undefined' && self) || (typeof window !== 'undefined' && window) || (typeof global !== 'undefined' && global)).chrome
 
 const limit = isChrome ? Infinity : 2147483648 - 16777216 // 2GB - 16MB
 
