@@ -7,6 +7,8 @@ const isChrome = !!((typeof globalThis !== 'undefined' && globalThis) || (typeof
 
 const limit = isChrome ? Infinity : 2147483648 - 16777216 // 2GB - 16MB
 
+const FSASupport = typeof navigator !== 'undefined' && navigator.storage?.getDirectory
+
 const noop = () => {}
 
 export default class HybridChunkStore {
@@ -41,7 +43,7 @@ export default class HybridChunkStore {
       this.fallbackStore = new MemoryChunkStore(this.chunkLength, opts)
       return
     }
-    const ChunkStore = 'getDirectory' in navigator.storage ? FSAccessChunkStore : IDBChunkStore
+    const ChunkStore = FSASupport ? FSAccessChunkStore : IDBChunkStore
     if (this.limit >= this.length) {
       this.fallbackStore = new ChunkStore(this.chunkLength, opts)
       return
