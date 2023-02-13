@@ -7,7 +7,7 @@ const isChrome = !!((typeof globalThis !== 'undefined' && globalThis) || (typeof
 
 const limit = isChrome ? Infinity : 2147483648 - 16777216 // 2GB - 16MB
 
-const FSASupport = typeof navigator !== 'undefined' && navigator.storage?.getDirectory
+const FSASupport = typeof navigator !== 'undefined' && navigator.storage?.getDirectory && FileSystemFileHandle?.prototype?.createWritable
 
 const noop = () => {}
 
