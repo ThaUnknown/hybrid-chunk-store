@@ -1,5 +1,5 @@
 import FSAccessChunkStore from 'fsa-chunk-store'
-import IDBChunkStore from 'idb-chunk-store'
+import IDBChunkStore from '@thaunknown/idb-chunk-store'
 import MemoryChunkStore from 'memory-chunk-store'
 import CacheChunkStore from 'cache-chunk-store'
 

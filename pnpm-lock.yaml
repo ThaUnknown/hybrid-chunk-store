@@ -1,21 +1,21 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@thaunknown/idb-chunk-store': ^1.0.2
   airtap: ^4.0.4
   airtap-manual: ^1.0.0
   cache-chunk-store: ^3.2.2
   deferred-chunk-store: ^1.0.1
   fsa-chunk-store: ^1.1.4
-  idb-chunk-store: ^1.0.1
   memory-chunk-store: ^1.3.5
   run-parallel: ^1.2.0
   tap-spec: ^5.0.0
   tape: ^5.6.3
 
 dependencies:
+  '@thaunknown/idb-chunk-store': 1.0.2
   cache-chunk-store: 3.2.2
   fsa-chunk-store: 1.1.4
-  idb-chunk-store: 1.0.1
   memory-chunk-store: 1.3.5
 
 devDependencies:
@@ -286,6 +286,13 @@ packages:
   /@socket.io/component-emitter/3.1.0:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
     dev: true
+
+  /@thaunknown/idb-chunk-store/1.0.2:
+    resolution: {integrity: sha512-UdKshbKdHDP+p0XPdv55QiU/scdB9TzvovGFSgXThf+7Yd3noLeYp6KpkYyc1jzUXvI3/8+TemPeASOimrOXvw==}
+    dependencies:
+      idb: 6.1.5
+      queue-microtask: 1.2.3
+    dev: false
 
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
@@ -1745,13 +1752,6 @@ packages:
     dependencies:
       safer-buffer: 2.1.2
     dev: true
-
-  /idb-chunk-store/1.0.1:
-    resolution: {integrity: sha512-1OtzeUFLfvK/PSMPs6DJumwfgQgGDiYW2owxdAJpra44/EaXsGcrHzyvdTCTulzunS/xf22woZOIqyk2PfWWfA==}
-    dependencies:
-      idb: 6.1.5
-      queue-microtask: 1.2.3
-    dev: false
 
   /idb/6.1.5:
     resolution: {integrity: sha512-IJtugpKkiVXQn5Y+LteyBCNk1N8xpGV3wWZk9EVtZWH8DYkjBn0bX1XnGP9RkyZF0sAcywa6unHqSWKe7q4LGw==}
