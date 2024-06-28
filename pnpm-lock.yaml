@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@thaunknown/idb-chunk-store':
-    specifier: ^1.0.3
-    version: 1.0.3
+    specifier: ^1.0.4
+    version: 1.0.4
   cache-chunk-store:
     specifier: ^3.2.2
     version: 3.2.2
@@ -308,8 +308,8 @@ packages:
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
     dev: true
 
-  /@thaunknown/idb-chunk-store@1.0.3:
-    resolution: {integrity: sha512-9K+QCOkHPHJn/jMkonfB5lemQdtXX5VsWsIdJH8R6FV6nyiy7qYt0FGR7uu8h4th7Ts3boi2oOL8G5Nviv5CKQ==}
+  /@thaunknown/idb-chunk-store@1.0.4:
+    resolution: {integrity: sha512-4/XDQZHKHyJCGeqnVjHyqeAXClZJ9l90rRvoTslUiuvwTGAUpIb3poL0LfGJEdSuWV+zzGdDjIm/3L4x6crwbg==}
     dependencies:
       idb: 7.1.1
       queue-microtask: 1.2.3
