@@ -3,11 +3,12 @@ import IDBChunkStore from '@thaunknown/idb-chunk-store'
 import MemoryChunkStore from 'memory-chunk-store'
 import CacheChunkStore from 'cache-chunk-store'
 
-const isChrome = !!((typeof globalThis !== 'undefined' && globalThis) || (typeof self !== 'undefined' && self) || (typeof window !== 'undefined' && window) || (typeof global !== 'undefined' && global)).chrome
+const isChrome = typeof chrome !== 'undefined' && !!chrome.loadTimes
 
 const limit = isChrome ? Infinity : 2147483648 - 16777216 // 2GB - 16MB
 
-const FSASupport = typeof navigator !== 'undefined' && navigator.storage?.getDirectory && FileSystemFileHandle?.prototype?.createWritable
+// electron likes to say that FSA doesnt exist, even tho getdirectory does, some safari versions are read-only and dont have createWritable
+const FSASupport = typeof navigator !== 'undefined' && navigator.storage?.getDirectory && typeof FileSystemFileHandle !== 'undefined' && FileSystemFileHandle?.prototype?.createWritable
 
 const noop = () => {}
 
